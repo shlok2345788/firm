@@ -1,6 +1,6 @@
 import { signup } from '@/app/auth/actions'
 
-export const dynamic = 'force-dynamic'
+export const instant = false
 
 export default function RegisterPage() {
   return (

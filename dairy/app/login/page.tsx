@@ -1,6 +1,6 @@
 import { login } from '@/app/auth/actions'
 
-export const dynamic = 'force-dynamic'
+export const instant = false
 
 export default function LoginPage() {
   return (
