@@ -3,7 +3,7 @@
 import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 
-export async function createCategory(formData: FormData) {
+export async function createCategory(formData: FormData): Promise<void> {
   const supabase = await createClient()
 
   // Verify super admin

@@ -4,7 +4,7 @@ import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-export async function createProduct(formData: FormData) {
+export async function createProduct(formData: FormData): Promise<void> {
   const supabase = await createClient()
 
   // Verify auth
