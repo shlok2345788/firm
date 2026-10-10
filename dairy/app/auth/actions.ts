@@ -16,7 +16,7 @@ export async function login(formData: FormData) {
   })
 
   if (error) {
-    return { error: error.message }
+    throw new Error(error.message)
   }
 
   revalidatePath('/', 'layout')
@@ -43,7 +43,7 @@ export async function signup(formData: FormData) {
   })
 
   if (error) {
-    return { error: error.message }
+    throw new Error(error.message)
   }
 
   revalidatePath('/', 'layout')

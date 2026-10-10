@@ -8,10 +8,10 @@ export async function createCategory(formData: FormData) {
 
   // Verify super admin
   const { data: { user } } = await supabase.auth.getUser()
-  if (!user) return { error: 'Unauthorized' }
+  if (!user) throw new Error('Unauthorized')
 
   const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
-  if (profile?.role !== 'super_admin') return { error: 'Forbidden' }
+  if (profile?.role !== 'super_admin') throw new Error('Forbidden')
 
   const name = formData.get('name') as string
   const slug = formData.get('slug') as string
@@ -24,9 +24,8 @@ export async function createCategory(formData: FormData) {
   })
 
   if (error) {
-    return { error: error.message }
+    throw new Error(error.message)
   }
 
   revalidatePath('/dashboard/categories')
-  return { success: true }
 }

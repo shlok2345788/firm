@@ -9,11 +9,11 @@ export async function createProduct(formData: FormData) {
 
   // Verify auth
   const { data: { user } } = await supabase.auth.getUser()
-  if (!user) return { error: 'Unauthorized' }
+  if (!user) throw new Error('Unauthorized')
 
   // Must be admin or super_admin
   const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
-  if (!profile || profile.role === 'customer') return { error: 'Forbidden' }
+  if (!profile || profile.role === 'customer') throw new Error('Forbidden')
 
   const title = formData.get('title') as string
   const slug = formData.get('slug') as string
@@ -36,7 +36,7 @@ export async function createProduct(formData: FormData) {
   })
 
   if (error) {
-    return { error: error.message }
+    throw new Error(error.message)
   }
 
   revalidatePath('/dashboard/products')
