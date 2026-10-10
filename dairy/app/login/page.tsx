@@ -1,5 +1,7 @@
 import { login } from '@/app/auth/actions'
 
+export const dynamic = 'force-dynamic'
+
 export default function LoginPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50">
